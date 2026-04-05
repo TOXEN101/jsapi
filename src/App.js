@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useContext } from "react";
+import Nav from "./components/nav.jsx";
+import Times from "./components/times.jsx";
+import { CelestialRhythms } from "./components/times.jsx";
+import { locationContext } from "./contexts/location context.js";
 
 function App() {
+  const timeValues = useContext(locationContext);
+  let timeElements = timeValues.map((time) => {
+    return (
+      <div>
+        <h2>
+          {time[0]}:{time[1]}
+        </h2>
+      </div>
+    );
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Nav></Nav>
+      <div><Times></Times>
+      <CelestialRhythms></CelestialRhythms>
+      </div>
+    </>
   );
 }
 

@@ -1,38 +1,200 @@
-.App {
+:root{
+  /* Light mode colors */
+  --primary:#004d4d;
+  --secondary:#c5ad59;
+  --tertiary:#e6d5b8;
+  --neutral:#f9fbf9;
+  /* dark mode colors */
+  --dark--primary:#05201D;
+  --dark--secondary:#E9C46A;
+  --dark--tertiary:#2D1513;
+  --dark--neutral:#0B1413;
+}  
+/* fonts */
+@font-face {
+  /* headline font Noto serif */
+  font-family: "noto";
+  src: url("../public/NotoSerif-Var.ttf");
+}
+@font-face {
+  /* Body and lable font Manrope */
+  font-family: "manrope";
+  src: url("../public/Manrope-Var.ttf");
+}
+body{
+  font-family: "manrope";
+  background-color: var(--dark--neutral);
+  color: var(--dark--secondary);
+}
+.nav-bar{
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--dark--primary);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.page-title{
+  font-family: "noto";
+}
+.location-input{
+  padding: 10px;
+  background-color: transparent;
+  color: var(--dark--secondary);
   text-align: center;
+  border: none;
+}
+.location-input:focus{
+  outline: none;
+  border-bottom:2px solid var(--dark--secondary) ;
+  border-radius: 5px;
+  background-color: var(--dark--neutral);
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* times */
+.time-list{
   display: flex;
   flex-direction: column;
+
+}
+.time-item{
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  justify-content: space-around;
+}
+/* demo */
+/* CelestialRhythms.css */
+
+.celestial-wrapper {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
+  background-color: #0e1111;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+.celestial-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: #151817;
+  padding: 2rem;
+  border-radius: 2.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.celestial-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.celestial-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  color: #e5e7eb;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.celestial-date {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.prayer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.prayer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.prayer-item-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.prayer-number {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 600;
+  width: 1rem;
+}
+
+.prayer-name-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.prayer-name {
+  font-size: 1.125rem;
+  color: #d1d5db;
+  letter-spacing: 0.025em;
+}
+
+.prayer-time {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* --- State: Current Prayer --- */
+.prayer-item.is-current {
+  background-color: #1c1f1e;
+  border-color: #323631;
+  box-shadow: 0 0 20px rgba(228, 200, 127, 0.05);
+}
+
+.prayer-item.is-current .prayer-name,
+.prayer-item.is-current .prayer-time {
+  color: #e4c87f;
+  font-weight: 500;
+  text-shadow: 0 0 8px rgba(228, 200, 127, 0.4);
+}
+
+.current-badge {
+  background-color: #e4c87f;
+  color: #151817;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 10px rgba(228, 200, 127, 0.5);
+}
+
+/* --- State: Next Prayer --- */
+.prayer-item.is-next {
+  border-left: 2px solid #e4c87f;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin-left: 0.25rem;
+  padding-left: 1.25rem;
+}
+
+.prayer-item.is-next .prayer-name,
+.prayer-item.is-next .prayer-time {
+  color: #e4c87f;
+  font-weight: 500;
 }
