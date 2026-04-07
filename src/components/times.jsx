@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { locationContext } from "../contexts/location context.js";
 export default function Times() {
-  const [timeValues,dateValues] = useContext(locationContext);
+  const [timeValues, dateValues] = useContext(locationContext);
   // console.log(dateValues)
 
-  let counter=1
+  let counter = 1;
   let timeElements = timeValues.map((time) => {
     return (
       <div className="time-item">
@@ -14,29 +14,45 @@ export default function Times() {
       </div>
     );
   });
-  return <div>
-    <div className="time-list">
-
-    {timeElements}
+  return (
+    <div>
+      <div className="time-list">{timeElements}</div>
     </div>
-    </div>;
+  );
 }
 
 const CelestialRhythms = () => {
-  
   const [timeValues, dateValues] = useContext(locationContext);
-  let counter=1
-  const prayerTimes=[]
-   timeValues.forEach((t)=>{
-    prayerTimes.push({id:counter++,name:t[0],time:t[1],status:'default'})
-  })
-  useEffect(()=>{
-  
-    const currentDay= dateValues[2][1].weekday.en
-    console.log(currentDay)
-    const currentMonth= dateValues[2][1].month.en
-    console.log(currentMonth)
-  })
+  const [dVal, setDval] = useState(
+    `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
+  );
+  let counter = 1;
+  const prayerTimes = [];
+  timeValues.forEach((t,i,ar) => {
+    let status;
+    if (
+      (parseInt(t[1]) <16 ) &&
+      (parseInt(ar[(i+1 )% ar.length][1]) >16  )
+    ) {
+      status = "current";
+    }
+      prayerTimes.push({
+        id: counter++,
+        name: t[0],
+        time: t[1],
+        status,
+        key: counter,
+      });
+  });
+  useEffect(() => {
+    if (dateValues && dateValues[2]) {
+      const currentDay = dateValues[2][1]?.weekday?.en;
+      const currentMonth = dateValues[2][1]?.month?.en;
+
+      setDval(`${currentDay},${dateValues[2][1].day} ${currentMonth}`);
+    }
+  }, [dateValues]);
+
   // const prayerTimes = [
   //   { id: '01', name: 'Fajr', time: '04:32 AM', status: 'default' },
   //   { id: '02', name: 'Asr', time: '03:45 PM', status: 'current' },
@@ -46,11 +62,10 @@ const CelestialRhythms = () => {
   return (
     <div className="celestial-wrapper">
       <div className="celestial-card">
-        
         {/* Header */}
         <div className="celestial-header">
           <h2 className="celestial-title">Prayer Times</h2>
-          <span className="celestial-date">{}</span>
+          <span className="celestial-date">{dVal}</span>
         </div>
 
         {/* List */}
@@ -58,17 +73,17 @@ const CelestialRhythms = () => {
           {prayerTimes.map((prayer) => {
             // Determine dynamic classes based on status
             let itemClass = "prayer-item";
-            if (prayer.status === 'current') itemClass += " is-current";
-            if (prayer.status === 'next') itemClass += " is-next";
+            if (prayer.status === "current") itemClass += " is-current";
+            if (prayer.status === "next") itemClass += " is-next";
 
             return (
-              <div key={prayer.id} className={itemClass}>
+              <div key={prayer.id} className={itemClass} key={prayer.key}>
                 <div className="prayer-item-left">
                   <span className="prayer-number">{prayer.id}</span>
-                  
+
                   <div className="prayer-name-group">
                     <span className="prayer-name">{prayer.name}</span>
-                    {prayer.status === 'current' && (
+                    {prayer.status === "current" && (
                       <span className="current-badge">Current</span>
                     )}
                   </div>
@@ -79,10 +94,9 @@ const CelestialRhythms = () => {
             );
           })}
         </div>
-
       </div>
     </div>
   );
 };
 
-export {CelestialRhythms};
+export { CelestialRhythms };

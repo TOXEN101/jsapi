@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Nav></Nav>
-      <div><Times></Times>
+      <div>
       <CelestialRhythms></CelestialRhythms>
       </div>
     </>
