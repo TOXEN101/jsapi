@@ -23,13 +23,23 @@ function LocationContext({ children }) {
       .then(function (response) {
         let respTime = response.data.data.timings;
         let respDate = response.data.data.date;
-        console.log( response);
+
         let values = Object.entries(respTime);
         let dValues = Object.entries(respDate);
+        // to only filer the prayer times
+        values = values.filter((t) => {
+          return (
+            t[0] === "Fajr" ||
+            t[0] === "Sunrise" ||
+            t[0] === "Dhuhr" ||
+            t[0] === "Asr" ||
+            t[0] === "Maghrib" ||
+            t[0] === "Isha"
+          );
+        });
 
-        console.log("date",dValues);
         setTimeValues(values);
-        setDateValues(dValues)
+        setDateValues(dValues);
       })
       .catch(function (error) {
         // handle error
@@ -37,11 +47,9 @@ function LocationContext({ children }) {
       });
   }, [add]);
 
-  console.log(timeValues);
-
   return (
     <>
-      <locationContext.Provider value={[timeValues,dateValues]}>
+      <locationContext.Provider value={[timeValues, dateValues]}>
         <addressContext.Provider value={[add, setAdd]}>
           {children}
         </addressContext.Provider>

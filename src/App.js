@@ -4,6 +4,7 @@ import Nav from "./components/nav.jsx";
 import Times from "./components/times.jsx";
 import { CelestialRhythms } from "./components/times.jsx";
 import { locationContext } from "./contexts/location context.js";
+import NextPrayerCountdown from "./components/next prayer countdown.jsx";
 
 function App() {
   const timeValues = useContext(locationContext);
@@ -21,6 +22,7 @@ function App() {
       <Nav></Nav>
       <div>
       <CelestialRhythms></CelestialRhythms>
+      <NextPrayerCountdown></NextPrayerCountdown>
       </div>
     </>
   );

@@ -1,49 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { locationContext } from "../contexts/location context.js";
-export default function Times() {
-  const [timeValues, dateValues] = useContext(locationContext);
-  // console.log(dateValues)
-
-  let counter = 1;
-  let timeElements = timeValues.map((time) => {
-    return (
-      <div className="time-item">
-        <div>0{counter++}</div>
-        <div>{time[0]}</div>
-        <div>{time[1]}</div>
-      </div>
-    );
-  });
-  return (
-    <div>
-      <div className="time-list">{timeElements}</div>
-    </div>
-  );
-}
+import { usePrayerTimes } from "../contexts/usePrayerTimes.js";
 
 const CelestialRhythms = () => {
-  const [timeValues, dateValues] = useContext(locationContext);
+  const [timeValues,dateValues] = useContext(locationContext);
+  const prayerTimes= usePrayerTimes();
   const [dVal, setDval] = useState(
     `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
   );
-  let counter = 1;
-  const prayerTimes = [];
-  timeValues.forEach((t,i,ar) => {
-    let status;
-    if (
-      (parseInt(t[1]) <16 ) &&
-      (parseInt(ar[(i+1 )% ar.length][1]) >16  )
-    ) {
-      status = "current";
-    }
-      prayerTimes.push({
-        id: counter++,
-        name: t[0],
-        time: t[1],
-        status,
-        key: counter,
-      });
-  });
+
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, "0");
+  const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  const formattedDate = `${dayName}, ${day}-${month}-${year}`;
+
+ 
   useEffect(() => {
     if (dateValues && dateValues[2]) {
       const currentDay = dateValues[2][1]?.weekday?.en;
@@ -52,7 +25,6 @@ const CelestialRhythms = () => {
       setDval(`${currentDay},${dateValues[2][1].day} ${currentMonth}`);
     }
   }, [dateValues]);
-
   // const prayerTimes = [
   //   { id: '01', name: 'Fajr', time: '04:32 AM', status: 'default' },
   //   { id: '02', name: 'Asr', time: '03:45 PM', status: 'current' },
@@ -65,7 +37,10 @@ const CelestialRhythms = () => {
         {/* Header */}
         <div className="celestial-header">
           <h2 className="celestial-title">Prayer Times</h2>
-          <span className="celestial-date">{dVal}</span>
+          <div>
+            <span className="celestial-greg-date">{formattedDate}</span>
+            <h3 className="celestial-hejri-date">{dVal}</h3>
+          </div>
         </div>
 
         {/* List */}
@@ -77,7 +52,7 @@ const CelestialRhythms = () => {
             if (prayer.status === "next") itemClass += " is-next";
 
             return (
-              <div key={prayer.id} className={itemClass} key={prayer.key}>
+              <div key={prayer.id} className={itemClass}>
                 <div className="prayer-item-left">
                   <span className="prayer-number">{prayer.id}</span>
 
@@ -85,6 +60,9 @@ const CelestialRhythms = () => {
                     <span className="prayer-name">{prayer.name}</span>
                     {prayer.status === "current" && (
                       <span className="current-badge">Current</span>
+                    )}
+                    {prayer.status === "next" && (
+                      <span className="next-badge">Next</span>
                     )}
                   </div>
                 </div>

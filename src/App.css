@@ -1,15 +1,17 @@
-:root{
+:root {
   /* Light mode colors */
-  --primary:#004d4d;
-  --secondary:#c5ad59;
-  --tertiary:#e6d5b8;
-  --neutral:#f9fbf9;
+  --primary: #004d4d;
+  --secondary: #c5ad59;
+  --tertiary: #e6d5b8;
+  --neutral: #f9fbf9;
   /* dark mode colors */
-  --dark--primary:#05201D;
-  --dark--secondary:#E9C46A;
-  --dark--tertiary:#2D1513;
-  --dark--neutral:#0B1413;
-}  
+  --dark--primary: #05201d;
+  --dark--secondary: #e9c46a;
+  --dark--tertiary: #2d1513;
+  --dark--neutral: #0b1413;
+  --dark--body: #0e1111;
+  --dark--card: #151817;
+}
 /* fonts */
 @font-face {
   /* headline font Noto serif */
@@ -21,45 +23,45 @@
   font-family: "manrope";
   src: url("../public/Manrope-Var.ttf");
 }
-body{
+body {
   font-family: "manrope";
-  background-color: var(--dark--neutral);
+  background-color: var(--dark--body);
   color: var(--dark--secondary);
 }
-.nav-bar{
+.nav-bar {
   padding: 5px 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: var(--dark--primary);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.page-title{
+.page-title {
   font-family: "noto";
 }
-.location-input{
+.location-input {
   padding: 10px;
   background-color: transparent;
   color: var(--dark--secondary);
   text-align: center;
   border: none;
 }
-.location-input:focus{
+.location-input:focus {
   outline: none;
-  border-bottom:2px solid var(--dark--secondary) ;
+  border-bottom: 2px solid var(--dark--secondary);
   border-radius: 5px;
   background-color: var(--dark--neutral);
-
 }
 
 /* times */
-.time-list{
+.time-list {
   display: flex;
   flex-direction: column;
-
 }
-.time-item{
+.time-item {
   margin: auto;
   display: grid;
   grid-template-columns: auto 1fr 1fr;
@@ -73,8 +75,10 @@ body{
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #0e1111;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--dark--body);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -82,7 +86,7 @@ body{
 .celestial-card {
   width: 100%;
   max-width: 500px;
-  background-color: #151817;
+  background-color: var(--dark--card);
   padding: 2rem;
   border-radius: 2.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -90,7 +94,7 @@ body{
 
 .celestial-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
   padding: 0 0.5rem;
@@ -104,8 +108,14 @@ body{
   font-weight: 500;
   letter-spacing: 0.025em;
 }
+.celestial-greg-date {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-style: italic;
+}
 
-.celestial-date {
+.celestial-hejri-date {
+  margin: 0;
   font-size: 0.875rem;
   color: #9ca3af;
   font-style: italic;
@@ -174,7 +184,18 @@ body{
 
 .current-badge {
   background-color: #e4c87f;
-  color: #151817;
+  color: var(--dark--card);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 10px rgba(228, 200, 127, 0.5);
+}
+.next-badge {
+  color: #e4c87f;
+  background-color: var(--dark--card);
   font-size: 0.65rem;
   font-weight: 700;
   padding: 0.25rem 0.75rem;
@@ -197,4 +218,107 @@ body{
 .prayer-item.is-next .prayer-time {
   color: #e4c87f;
   font-weight: 500;
+}
+/* NextPrayerCountdown.css */
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+.countdown-card {
+  position: relative;
+  /* background-color: var(--dark--card); Dark background matching your theme */
+  border-radius: 1.5rem;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden; /* Keeps the moon graphic contained */
+  box-sizing: border-box;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(-45deg, #e9c56a44 5%, #151817 50%);
+}
+
+/* Creating the crescent moon shape using CSS */
+.moon-graphic {
+  position: absolute;
+  top: -20px;
+  right: -30px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: transparent;
+  /* The shadow creates the actual visible crescent */
+  box-shadow: -25px 25px 0 0 #232725;
+  pointer-events: none;
+}
+
+.countdown-header {
+  font-size: 3.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+  position: relative;
+  z-index: 1; /* Keeps text above the moon graphic */
+}
+
+.text-until {
+  color: #e5e7eb;
+}
+
+.text-prayer {
+  color: #e4c87f;
+  font-style: italic;
+}
+
+.time-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.time-number {
+  font-size: 5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #e4c87f;
+  line-height: 1;
+  /* The golden glow effect */
+  text-shadow: 0 0 25px rgba(228, 200, 127, 0.3);
+}
+
+.time-label {
+  font-size: 1.5rem;
+  color: #9ca3af;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.actions-row {
+  position: relative;
+  z-index: 1;
+}
+
+.action-button {
+  background-color: #1a1d1c;
+  border: 1px solid #323631;
+  color: #9ca3af;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.action-button:hover {
+  background-color: #232725;
+  color: #e5e7eb;
+  border-color: #4a4e49;
 }
