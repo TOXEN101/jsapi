@@ -41,12 +41,13 @@ body {
 }
 .page-title {
   font-family: "noto";
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
 }
 .location-input {
   padding: 10px;
   background-color: transparent;
   color: var(--dark--secondary);
-  text-align: center;
+  text-align: right;
   border: none;
 }
 .location-input:focus {
@@ -72,7 +73,7 @@ body {
 
 .celestial-wrapper {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   min-height: 100vh;
   background-color: var(--dark--body);
@@ -85,9 +86,10 @@ body {
 
 .celestial-card {
   width: 100%;
-  max-width: 500px;
+  max-width: 436px;
+  max-height: 520px;
   background-color: var(--dark--card);
-  padding: 2rem;
+  padding: clamp(0.5rem,1vw + 2rem,2rem);
   border-radius: 2.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
@@ -233,7 +235,6 @@ body {
 
 .countdown-card {
   position: relative;
-  /* background-color: var(--dark--card); Dark background matching your theme */
   border-radius: 1.5rem;
   padding: 3rem 2.5rem;
   width: 100%;

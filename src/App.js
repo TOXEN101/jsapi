@@ -21,8 +21,8 @@ function App() {
     <>
       <Nav></Nav>
       <div>
-      <CelestialRhythms></CelestialRhythms>
       <NextPrayerCountdown></NextPrayerCountdown>
+      <CelestialRhythms></CelestialRhythms>
       </div>
     </>
   );
