@@ -5,6 +5,9 @@ import Times from "./components/times.jsx";
 import { CelestialRhythms } from "./components/times.jsx";
 import { locationContext } from "./contexts/location context.js";
 import NextPrayerCountdown from "./components/next prayer countdown.jsx";
+import PostPrayerAdhkar from "./components/PostPrayerAdhkar.jsx";
+import SalatAyat from "./components/SalatAyat.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   const timeValues = useContext(locationContext);
@@ -20,10 +23,13 @@ function App() {
   return (
     <>
       <Nav></Nav>
-      <div>
-      <NextPrayerCountdown></NextPrayerCountdown>
-      <CelestialRhythms></CelestialRhythms>
+      <div className="container">
+        <PostPrayerAdhkar></PostPrayerAdhkar>
+        <NextPrayerCountdown></NextPrayerCountdown>
+        <CelestialRhythms></CelestialRhythms>
+        <SalatAyat></SalatAyat>
       </div>
+      <Footer></Footer>
     </>
   );
 }

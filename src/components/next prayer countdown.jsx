@@ -51,25 +51,6 @@ const NextPrayerCountdown = ({ prayerName = "Maghrib", minutesLeft = 45 }) => {
     // It will ONLY re-run when the prayer actually changes to the next one.
   }, [nextTimeString]);
 
-  // if (prayerTimes && prayerTimes.length > 0) {
-  //   const nextp = prayerTimes.find((pt) => pt.status === "next");
-  //   if (nextp) nPrayer = nextp;
-  // }
-  ////a: adhan time
-  // let aTime =
-  //   parseInt(nPrayer.time.split(":")[0]) +
-  //   parseFloat(nPrayer.time.split(":")[1]) / 60;
-
-  // const lHour = new Date().getHours();
-  // const lMin = new Date().getMinutes() / 60;
-  // const lTime = lHour + lMin;
-
-  // let timeUntilAdhan = aTime > lTime ? aTime - lTime : aTime - lTime + 24;
-  // const timeUntilAdhanH = Math.trunc(timeUntilAdhan);
-  // const timeUntilAdhanM = Math.round((timeUntilAdhan - timeUntilAdhanH) * 60)
-  //   .toString()
-  //   .padStart(2, "0");
-  // timeUntilAdhan = `${timeUntilAdhanH}:${timeUntilAdhanM}`;
 
   return (
     <div className="countdown-container">
@@ -86,7 +67,7 @@ const NextPrayerCountdown = ({ prayerName = "Maghrib", minutesLeft = 45 }) => {
         {/* Time Display */}
         <div className="time-display">
           <span className="time-number">{timeLeft.time}</span>
-          <span className="time-label">Hours</span>
+          {/* <span className="time-label">Hours</span> */}
         </div>
 
         {/* Actions Row */}

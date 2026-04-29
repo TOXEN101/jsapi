@@ -3,6 +3,7 @@ import { locationContext } from "../contexts/location context.js";
 import { usePrayerTimes } from "../contexts/usePrayerTimes.js";
 
 const CelestialRhythms = () => {
+  // don't remove timeValues, it's there for destructuring
   const [timeValues,dateValues] = useContext(locationContext);
   const prayerTimes= usePrayerTimes();
   const [dVal, setDval] = useState(
