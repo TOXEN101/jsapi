@@ -71,7 +71,7 @@ const NextPrayerCountdown = ({ prayerName = "Maghrib", minutesLeft = 45 }) => {
         </div>
 
         {/* Actions Row */}
-        <div className="actions-row">
+        <div className="actions-row" >
           {/* <button className="action-button">View Duas for Sunset</button> */}
         </div>
       </div>
