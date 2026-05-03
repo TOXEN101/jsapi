@@ -24,8 +24,8 @@ function App() {
     <>
       <Nav></Nav>
       <div className="container">
-        <PostPrayerAdhkar></PostPrayerAdhkar>
         <NextPrayerCountdown></NextPrayerCountdown>
+        <PostPrayerAdhkar></PostPrayerAdhkar>
         <CelestialRhythms></CelestialRhythms>
         <SalatAyat></SalatAyat>
       </div>

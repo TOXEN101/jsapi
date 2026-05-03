@@ -644,13 +644,13 @@ body {
 
 /* Top Row: 50/50 Split */
 .adhkar-wrapper {
-  grid-column: 1 / 7; /* Takes up 6 out of 12 columns */
+  grid-column: 7 / 13; /* Takes up 6 out of 12 columns */
   display: flex; /* Crucial for making the inner card stretch */
 }
 
 .countdown-container {
-  grid-column: 7 / 13; /* Takes up 6 out of 12 columns */
   display: flex;
+  grid-column: 1 / 7; /* Takes up 6 out of 12 columns */
 }
 
 /* Bottom Row: 33/66 Split */
@@ -704,9 +704,7 @@ footer a{
   font-family:"manrope" ;
 }
 
-/* =========================================
-   MOBILE RESPONSIVE RULES (Tablets & Phones)
-   ========================================= */
+/*MOBILE RESPONSIVE RULES (Tablets & Phones)*/
 
 @media (max-width: 1200px) {
   /* 1. Break the Grid and Stack Everything Vertically */
